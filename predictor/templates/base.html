@@ -1,0 +1,165 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Farmer's Portal{% endblock %}</title>
+        
+        <!-- Link to your custom CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'predictor/css/style.css' %}">
+    
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <!-- Font Awesome for Icons -->
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        
+        <!-- CSS for Typewriter Effect -->
+        <style>
+            .typewriter h1 {
+                overflow: hidden;
+                border-right: .15em solid white;
+                white-space: nowrap;
+                margin: 0 auto;
+                letter-spacing: .15em;
+                animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+            }
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+            @keyframes blink-caret {
+                from, to { border-color: transparent }
+                50% { border-color: white; }
+            }
+        </style>
+    </head>
+    
+<body class="bg-gray-50 text-gray-900">
+
+   
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 text-white">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <a href="/" class="text-2xl font-semibold">Farmer's Portal</a>
+
+            <div class="hidden md:flex space-x-6">
+                <a href="{% url 'home' %}" 
+                   class="bg-gradient-to-r from-green-400 to-green-500 text-gray-800 px-4 py-2 rounded-full shadow-md hover:bg-gray-300 hover:text-gray-900 transition duration-300 ease-in-out transform hover:scale-105">
+                   Home
+                </a>
+                <a href="{% url 'services' %}" 
+                   class="bg-gradient-to-r from-green-400 to-green-500 text-gray-800 px-4 py-2 rounded-full shadow-md hover:bg-gray-300 hover:text-gray-900 transition duration-300 ease-in-out transform hover:scale-105">
+                   Services
+                </a>
+                <a href="{% url 'contact' %}" 
+                   class="bg-gradient-to-r from-green-400 to-green-500 text-gray-800 px-4 py-2 rounded-full shadow-md hover:bg-gray-300 hover:text-gray-900 transition duration-300 ease-in-out transform hover:scale-105">
+                   Contact Us
+                </a>
+                <a href="{% url 'login' %}" 
+                   class="bg-gradient-to-r from-green-400 to-green-500 text-white px-4 py-2 rounded-full shadow-md hover:from-green-500 hover:to-green-600 transition duration-300 ease-in-out transform hover:scale-105">
+                   Login
+                </a>
+                <a href="{% url 'register' %}" 
+                   class="bg-gradient-to-r from-green-400 to-green-500 text-white px-4 py-2 rounded-full shadow-md hover:from-green-500 hover:to-green-600 transition duration-300 ease-in-out transform hover:scale-105">
+                   Register
+                </a>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <a href="{% url 'home' %}" class="block px-6 py-2 hover:bg-gray-700">Home</a>
+            <a href="{% url 'services' %}" class="block px-6 py-2 hover:bg-gray-700">Services</a>
+            <a href="{% url 'contact' %}" class="block px-6 py-2 hover:bg-gray-700">Contact Us</a>
+            <a href="{% url 'login' %}" class="block px-6 py-2 bg-white text-green-600">Login</a>
+            <a href="{% url 'register' %}" class="block px-6 py-2 bg-green-500 text-white">Register</a>
+        </div>
+    </nav>
+    <header class="header-bg text-white text-center py-6 bg-black bg-opacity-50">
+        <div class="typewriter">
+            <h1 class="text-3xl font-bold">Jai Jawan Jai Kisan</h1>
+        </div>
+    </header>
+    
+
+    <!-- Content Block -->
+    <div class="container mx-auto mt-10 px-6">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Sahyadri Farms Post Harvest Care Limited</p>
+                <p>Gat No 314/1, 314/2/1, A/p Mohadi, Taluka Dindori,<br> District Nashik, Maharashtra 422207, India</p>
+                <p>CIN - U01111MH2020PLC344170</p>
+                <p><strong>Phone:</strong> 1800 212 002 020</p>
+                <p><strong>Email:</strong> info@sahyadrifarms.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Featured Links</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Meet our Chairman</a></li>
+                    <li><a href="#">Food Safety Standards</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Investors</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Farmer App</h3>
+                <a href="#"><img src="https://example.com/path/to/open-source-google-play-badge.png" alt="Google Play"></a>
+                <a href="#"><img src="https://example.com/path/to/open-source-app-store-badge.png" alt="App Store"></a>
+                <img src="https://example.com/path/to/open-source-setu-verified.png" alt="Setu Verified">
+            </div>
+            
+        </div>
+
+        <div class="footer-bottom">
+            <p>© Sahyadri Farms Post Harvest Care Ltd.</p>
+            <p>FarmSetu Supply Chain Stack</p>
+            <div class="social-icons">
+                <a href="#"><img src="https://example.com/path/to/open-source-facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="https://example.com/path/to/open-source-x-icon.png" alt="X (formerly Twitter)"></a>
+                <a href="#"><img src="https://example.com/path/to/open-source-instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="https://example.com/path/to/open-source-youtube-icon.png" alt="YouTube"></a>
+                <a href="#"><img src="https://example.com/path/to/open-source-linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+            
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            var mobileMenu = document.getElementById("mobile-menu");
+            if (mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.remove("hidden");
+            } else {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+    </script>
+</body>
+</html>
