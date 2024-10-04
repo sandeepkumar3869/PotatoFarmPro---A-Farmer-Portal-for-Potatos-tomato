@@ -65,6 +65,8 @@ def checkout(request):
 def wishlist(request):
     # Here you can implement the logic for displaying the user's wishlist.
     return render(request, 'wishlist.html')
+def contact(request):
+    return render(request, 'contact-us.html')
 
 def gallery(request):
     # Here you can implement the logic for displaying the gallery.
@@ -121,7 +123,6 @@ def predict_disease(request, model_type):
 
 
 
-def contact(request):
-    return render(request, 'contact-us.html')
+
 
 # Other existing views...
