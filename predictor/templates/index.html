@@ -53,15 +53,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="custom-select-box">
+                    <div class="custom-select-box">
                         <select id="basic" class="selectpicker show-tick form-control" data-placeholder="₹ INR">
-							<option>₹ JPY</option>
-							<option>₹ INR</option>
-							<option>€ EUR</option>
-						</select>
+                            <option>₹ JPY</option>
+                            <option>₹ INR</option>
+                            <option>€ EUR</option>
+                        </select>
                     </div>
                     <div class="right-phone-box">
-                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                        <p>Call US :- <a href="#"> +911 900 800 100</a></p>
                     </div>
                     <div class="our-link">
                         <ul>
@@ -72,12 +72,21 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="login-box">
-						<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-							<option>Register Here</option>
-							<option>Sign In</option>
-						</select>
-					</div>
+                    <div class="login-box">
+                        <ul class="login-options">
+                            {% if user.is_authenticated %}
+                                <li>
+                                    <form id="logout-form" method="POST" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-link" style="color: aliceblue;">Logout</button>
+                                    </form>
+                                </li>
+                            {% else %}
+                                <li><a style="color: aliceblue;" href="{% url 'register' %}">Register Here</a></li>
+                                <li><a style="color: aliceblue;" href="{% url 'login1' %}">Sign In</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                     <div class="text-slid-box">
                         <div id="offer-box" class="carouselTicker">
                             <ul class="offer-box">
@@ -93,18 +102,6 @@
                                 <li>
                                     <i class="fab fa-opencart"></i> Off 50%! Shop Now
                                 </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 10%! Shop Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% off on Vegetables
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT30
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Off 50%! Shop Now 
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -112,6 +109,9 @@
             </div>
         </div>
     </div>
+    
+    
+    
     <!-- End Main Top -->
 
     <!-- Start Main Top -->
@@ -196,7 +196,7 @@
                         </li>
                         
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="{% url 'cart' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: ₹180.00</span>
                         </li>
                     </ul>
@@ -228,8 +228,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                            <h1 class="m-b-20"><strong>Welcome To <br> PotatoFarmPro</strong></h1>
+                            <p class="m-b-40">Monitor your users' experience on the potato disease prediction platform in real-time and analyze trends to identify any changes in performance over time.</p>
                             <p><a class="btn hvr-hover" href="#">Shop New</a></p>
                         </div>
                     </div>
@@ -240,8 +240,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                            <h1 class="m-b-20"><strong>Welcome To <br> PotatoFarmPro</strong></h1>
+                            <p class="m-b-40">Gain insights into how users interact with your website in real-time, or analyze trends to monitor changes in performance over time.</p>
                             <p><a class="btn hvr-hover" href="#">Shop New</a></p>
                         </div>
                     </div>
@@ -252,8 +252,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                            <h1 class="m-b-20"><strong>Welcome To <br> PotatoFarmPro</strong></h1>
+                            <p class="m-b-40">Discover how users engage with your website in real-time, or explore trends to track any changes in performance over time.</p>
                             <p><a class="btn hvr-hover" href="#">Shop New</a></p>
                         </div>
                     </div>
@@ -275,19 +275,19 @@
                     
                     <div class="shop-cat-box">
                         <img class="img-fluid" src="{% static 'images/categories_img_01.jpg' %}" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+                        <a class="btn hvr-hover" href="#">Explore Vegetables</a>
                     </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="shop-cat-box">
                             <img class="img-fluid" src="{% static 'images/categories_img_02.jpg' %}" alt="" />
-                            <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+                            <a class="btn hvr-hover" href="#">Discover Fruits</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="shop-cat-box">
                             <img class="img-fluid" src="{% static 'images/categories_img_03.jpg' %}" alt="" />
-                            <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+                            <a class="btn hvr-hover" href="#">Explore LEAFI Vegetables</a>
                         </div>
                     </div>
 
@@ -322,7 +322,8 @@
                 <div class="col-lg-12">
                     <div class="title-all text-center">
                         <h1>Fruits & Vegetables</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                            <p>Explore our extensive collection of fruits and vegetables, and learn how our predictions can help enhance crop health and yield. Join us in advancing sustainable agriculture!</p>
+
                     </div>
                 </div>
             </div>
@@ -356,7 +357,7 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
+                            <h4>CARROT</h4>
                             <h5> ₹7.79</h5>
                         </div>
                     </div>
@@ -379,7 +380,7 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
+                            <h4>TOMATO</h4>
                             <h5> ₹9.79</h5>
                         </div>
                     </div>
@@ -402,7 +403,7 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
+                            <h4>Gullar</h4>
                             <h5> ₹10.79</h5>
                         </div>
                     </div>
@@ -425,7 +426,7 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Lorem ipsum dolor sit amet</h4>
+                            <h4>Papaya</h4>
                             <h5> ₹15.79</h5>
                         </div>
                     </div>
@@ -455,9 +456,9 @@
                         </div>
                         <div class="blog-content">
                             <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
+                                <h3>Innovative Solutions for Potato Disease Management</h3>
+                                <p>In the face of evolving agricultural challenges, effective disease management is crucial. Our platform offers cutting-edge tools that empower farmers to identify and respond to potato diseases promptly. With user-friendly interfaces and data-driven insights, we aim to enhance crop health and promote sustainable farming practices. Join us in embracing technology for a more resilient agricultural future.</p>
+                            </div>                            
                             <ul class="option-blog">
                                 <li><a href="#"><i class="far fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fas fa-eye"></i></a></li>
@@ -473,9 +474,9 @@
                         </div>
                         <div class="blog-content">
                             <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
+                                <h3>Enhancing Crop Health with Advanced Predictions</h3>
+                                <p>Discover how our innovative tools can help optimize growth for your crops. From identifying diseases early to improving yield quality, our solutions provide essential insights for farmers. Join us in transforming agricultural practices for a sustainable future.</p>
+                            </div>                            
                             <ul class="option-blog">
                                 <li><a href="#"><i class="far fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fas fa-eye"></i></a></li>
@@ -491,9 +492,10 @@
                         </div>
                         <div class="blog-content">
                             <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
+                                <h3>Transforming Agriculture: The Power of Disease Prediction</h3>
+                                <p>In today's rapidly changing agricultural landscape, it is essential to implement effective disease management strategies. Our advanced prediction tools help farmers identify potential threats to their crops, allowing for timely interventions. Explore how leveraging technology can enhance crop health and ensure sustainable farming practices.</p>
                             </div>
+                            
                             <ul class="option-blog">
                                 <li><a href="#"><i class="far fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fas fa-eye"></i></a></li>
@@ -623,8 +625,9 @@
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<h3>Connect with Us on Social Media</h3>
+                                <p>Stay updated with the latest news, tips, and advancements in crop health management. Join our community to share insights and learn more about sustainable agriculture practices.</p>
+
 							<ul>
                                 <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
@@ -641,9 +644,9 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
-                            <h4>About Freshshop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
+                            <h4>About POTOTOFARMPRO</h4>
+                            <p>POTOTOFARMPRO is dedicated to revolutionizing agricultural practices through innovative technology. Our platform focuses on providing farmers with accurate predictions and insights to combat potato diseases, ensuring healthier crops and improved yields. We believe in empowering farmers with the tools they need for sustainable farming.</p> 
+                            <p>Our mission is to leverage data-driven solutions that enhance crop health and support farmers in making informed decisions. Join us in our journey to transform agriculture for a better future.</p>							
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -667,7 +670,7 @@
                                     <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+91-888705770">+91-888 705 770</a></p>
                                 </li>
                                 <li>
                                     <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
@@ -682,7 +685,7 @@
     <!-- End Footer  -->
 <!-- Start copyright  -->
 <div class="footer-copyright">
-    <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
+    <p class="footer-company">All Rights Reserved. &copy; 2024 <a href="#">ThewayShop</a> Design By :
         <a href="https://html.design/">html design</a></p>
 </div>
 <!-- End copyright  -->

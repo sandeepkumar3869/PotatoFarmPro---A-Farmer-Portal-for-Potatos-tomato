@@ -36,12 +36,24 @@
                     <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" class="logo" alt="Farmer's Portal"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'shop' %}">Sidebar Shop</a></li>
+                                <li><a href="{% url 'shop_detail' %}">Shop Detail</a></li>
+                                <li><a href="{% url 'cart' %}">Cart</a></li>
+                                <li><a href="{% url 'checkout' %}">Checkout</a></li>
+                                <li><a href="{% url 'my_account' %}">My Account</a></li>
+                                <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -56,7 +68,7 @@
             <!-- Potato Disease Prediction -->
             <div class="col-lg-6 mb-4">
                 <div class="card h-100">
-                    <img src="{% static 'images/potato.jpg' %}" class="card-img-top" alt="Potato Disease">
+                    <img src="{% static 'images/image copy.png' %}" class="card-img-top" alt="Potato Disease">
                     <div class="card-body">
                         <h4 class="card-title">Potato Disease Prediction</h4>
                         <p class="card-text">Click below to predict and manage diseases in your potato crops.</p>
@@ -68,7 +80,7 @@
             <!-- Tomato Disease Prediction -->
             <div class="col-lg-6 mb-4">
                 <div class="card h-100">
-                    <img src="{% static 'images/tomato.jpg' %}" class="card-img-top" alt="Tomato Disease">
+                    <img src="{% static 'images/image.png' %}" class="card-img-top" alt="Tomato Disease">
                     <div class="card-body">
                         <h4 class="card-title">Tomato Disease Prediction</h4>
                         <p class="card-text">Click below to predict and manage diseases in your tomato crops.</p>
@@ -104,7 +116,7 @@
                         <div class="footer-widget">
                             <h4>Contact Info</h4>
                             <p>Address: 123 Farming St, Agricultural City, Country</p>
-                            <p>Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
+                            <p>Phone: <a href="tel:+91234567890">+9123 456 7890</a></p>
                             <p>Email: <a href="mailto:info@farmersportal.com">info@farmersportal.com</a></p>
                         </div>
                     </div>

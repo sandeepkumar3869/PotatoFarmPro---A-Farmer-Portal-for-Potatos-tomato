@@ -1,26 +1,5 @@
 from django.urls import path
-from . import views
-from .views import RegisterView, LoginView, LogoutView
-
-
-
-# urlpatterns = [
-#     path('', views.index, name='home'),  # change 'index' to 'home'
-#     path('services/', views.services, name='services'),
-#     path('contact/', views.contact, name='contact'),
-#     path('predict/<str:model_type>/', views.predict_disease, name='predict_disease'),
-#     path('login/', LoginView.as_view(), name='login'),
-#     path('register/', RegisterView.as_view(), name='register'),
-#     path('logout/', LogoutView, name='logout'),
-# ]
-
-
-# from django.urls import path
-# from .views import LoginView, RegisterView, LogoutView  # Ensure you have the correct import for your views
-# from . import views
-
-# from django.urls import path
-from .views import LoginView, RegisterView, LogoutView  # Import LogoutView as a class
+from .views import logout_view 
 from . import views
 
 urlpatterns = [
@@ -36,11 +15,7 @@ urlpatterns = [
     path('gallery/', views.gallery, name='gallery'),
     path('contact/', views.contact, name='contact'),
     path('predict/<str:model_type>/', views.predict_disease, name='predict_disease'),
-    path('login/', LoginView.as_view(), name='login'),  # Login page
-    
-    
-
-    path('register/', RegisterView.as_view(), name='register'),  # Register page
-    path('logout/', LogoutView.as_view(), name='logout'),  # Logout page
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login1, name='login1'),
+    path('logout/', views.logout_view, name='logout'),
 ]
-
