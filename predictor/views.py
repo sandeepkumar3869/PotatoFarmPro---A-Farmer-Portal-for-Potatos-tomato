@@ -1,75 +1,109 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views import View
-from django.contrib.auth.views import LogoutView as AuthLogoutView
-from .forms import DiseasePredictionForm
-from .model import get_model
+from django.conf import settings
+from django.core.files.storage import default_storage
 from PIL import Image
 import numpy as np
 import os
-from django.core.files.storage import default_storage
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import redirect
-from django.contrib.auth import logout
-from django.contrib import messages
+from .forms import DiseasePredictionForm, CustomUserCreationForm, VegetableForm
+from .model import Profile, Vegetable,CartItem, get_model
+from .cart import Cart
 
-# Registration view
+def cart_view(request):
+    cart = Cart(request)  # Initialize your cart
+    cart_items = cart.get_items()  # Get the items in the cart
+    total_amount = cart.get_total()  # Calculate the total amount
+    return render(request, 'cart.html', {'cart_items': cart_items, 'total_amount': total_amount})
+
+@login_required
+def add_to_cart(request, vegetable_id):
+    vegetable = get_object_or_404(Vegetable, id=vegetable_id)
+
+    cart = Cart(request)  # Initialize your cart
+    cart.add(vegetable)  # Use the modified add method
+
+    messages.success(request, f'{vegetable.name} has been added to your cart.')
+    return redirect('shop')
+
+def remove_from_cart(request, vegetable_id):
+    cart = Cart(request)
+    vegetable = get_object_or_404(Vegetable, id=vegetable_id)
+    cart.remove(vegetable)
+    messages.success(request, f'{vegetable.name} has been removed from your cart.')
+    return redirect('cart')
+
+def shop_view(request):
+    vegetables = Vegetable.objects.all()  
+    return render(request, 'shop.html', {'vegetables': vegetables})
+
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            messages.success(request, f'Account created for {user.username}. You can now login.')
-            return redirect('login1')
-        else:
-            messages.error(request, 'An error occurred during registration. Please try again.')
+            profile = Profile.objects.create(
+                user=user,
+                full_name=form.cleaned_data.get('full_name'),
+                phone_number=form.cleaned_data.get('phone_number'),
+                birth_date=form.cleaned_data.get('birth_date'),
+                gender=form.cleaned_data.get('gender'),
+                role=form.cleaned_data.get('role')
+            )
+            login(request, user)
+            return redirect('farmer_portal' if profile.role == 'farmer' else 'home')
+        print(form.errors)
     else:
-        form = UserCreationForm()
-    
+        form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
 
 
-# Login view
 def login1(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
+        role = request.POST.get('role')  # Get the selected role from the form
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
+            user = form.get_user()
+            if hasattr(user, 'profile') and user.profile.role == role:
                 login(request, user)
-                messages.success(request, f'Welcome, {username}! You are now logged in.')
-                return redirect('home')  # Redirect to the homepage or dashboard
-            else:
-                messages.error(request, 'Invalid username or password.')
+                messages.success(request, f'Welcome, {user.username}! You are now logged in.')
+                redirect_page = 'farmer_portal' if user.profile.role == 'farmer' else 'home'
+                return redirect(redirect_page)
+            messages.error(request, 'Role mismatch or invalid role selected.')
         else:
             messages.error(request, 'Invalid username or password.')
-    
+            print(form.errors)
     else:
         form = AuthenticationForm()
-    
     return render(request, 'login.html', {'form': form})
 
+def farmer_portal(request):
+    if request.method == 'POST':
+        form = VegetableForm(request.POST)
+        if form.is_valid():
+            vegetable = form.save(commit=False)
+            vegetable.farmer = request.user
+            vegetable.save()
+            return redirect('farmer_portal')
+    else:
+        form = VegetableForm()
+    vegetables = Vegetable.objects.filter(farmer=request.user)
+    return render(request, 'farmer_portal.html', {'form': form, 'vegetables': vegetables})
 
-# Logout view
+@login_required
+def my_account(request):
+    return render(request, 'my_account.html', {'profile': request.user.profile})
+
 def logout_view(request):
     logout(request)
     messages.info(request, 'You have been successfully logged out.')
     return redirect('home')
 
-
 def home_view(request):
     return render(request, 'index.html')
-
-
 
 def index(request):
     return render(request, 'index.html')
@@ -77,6 +111,7 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def services(request):
     return render(request, 'services.html')
 
@@ -100,10 +135,6 @@ def contact(request):
 
 def gallery(request):
     return render(request, 'gallery.html')
-
-@login_required
-def my_account(request):
-    return render(request, 'my_account.html')
 
 def preprocess_image(image_path):
     img = Image.open(image_path)
@@ -150,3 +181,14 @@ def predict_disease(request, model_type):
     else:
         form = DiseasePredictionForm()
     return render(request, 'predictor/predict.html', {'form': form, 'model_type': model_type})
+
+def edit_vegetable(request, id):
+    vegetable = get_object_or_404(Vegetable, id=id)
+    if request.method == 'POST':
+        form = VegetableForm(request.POST, instance=vegetable)
+        if form.is_valid():
+            form.save()
+            return redirect('farmer_portal')  # Adjust this as needed
+    else:
+        form = VegetableForm(instance=vegetable)
+    return render(request, 'edit_vegetable.html', {'form': form})

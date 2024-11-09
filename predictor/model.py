@@ -5,10 +5,12 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
+    full_name = models.CharField(max_length=100, blank=True)
+    phone_number = models.CharField(max_length=15, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    
+    gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], blank=True)
+    role = models.CharField(max_length=10, choices=[('farmer', 'Farmer'), ('customer', 'Customer')], blank=True)
+
     def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -35,3 +37,20 @@ def get_model(model_type):
         model = tf.keras.models.load_model(model_file)
         _models[model_type] = model
         return model
+
+class Vegetable(models.Model):
+    farmer = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to the farmer
+    name = models.CharField(max_length=100)  # Name of the vegetable
+    quantity = models.PositiveIntegerField()  # Available quantity
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # Price per unit
+
+    def __str__(self):
+        return self.name
+    
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    vegetable = models.ForeignKey(Vegetable, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.vegetable.name} (x{self.quantity})'

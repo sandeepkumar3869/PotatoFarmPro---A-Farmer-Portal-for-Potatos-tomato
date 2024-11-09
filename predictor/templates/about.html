@@ -5,6 +5,26 @@
 <!-- Basic -->
 
 <head>
+    <style>
+        .social {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social li {
+            margin: 0 10px; /* Adjust spacing between icons */
+        }
+
+        .social a {
+            color: #333; /* Change color to match your design */
+            font-size: 24px; /* Adjust icon size */
+            transition: color 0.3s;
+        }
+
+        .social a:hover {
+            color: #007bff; /* Change color on hover */
+        }
+    </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -28,6 +48,7 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8sF9X0l4h2A2mM6ZlK4G+NlM8gBfuj2P4+k4" crossorigin="anonymous">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -226,161 +247,80 @@
         <div class="container">
             <div class="row">
 				<div class="col-lg-6">
-                    <div class="banner-frame"> 
+                    <div class="banner-frame mb-4"> 
                         <img class="img-fluid" src="{% static 'images/about-img.jpg' %}" alt="About Image" />
                     </div>
-                    
-                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <h2 class="noo-sh-title-top">We are <span>Freshshop</span></h2>
-                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                        voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<a class="btn hvr-hover" href="#">Read More</a>
+                <div class="col-lg-6 mt-3">
+                    <h2 class="noo-sh-title-top">We are <span>PotatoFarmPro</span></h2>
+                    <p>"PotatoFarmPro is an AI-powered agricultural platform designed to assist potato and tomato farmers with real-time crop monitoring and disease detection. By combining advanced machine learning techniques with a user-friendly interface, PotatoFarmPro enables farmers to upload crop images and receive rapid, reliable diagnoses. This helps them proactively manage crop health, protecting against diseases like blight and improving yield quality."</p>
+                    <p>Our platform, built with Django and TensorFlow, uses deep learning to analyze images and identify potential diseases with high accuracy. PotatoFarmPro is equipped with a streamlined dashboard, user authentication, and a responsive design powered by Tailwind CSS. It provides farmers with actionable insights and is designed to scale, making it adaptable to additional features and crop types as the platform evolves.</p>
+                    <p>At PotatoFarmPro, our mission is to bridge the gap between technology and agriculture, helping farmers make informed, data-driven decisions to secure and improve their crops. Join us in transforming farming with smarter, AI-based solutions for the future of agriculture.</p>
+                    <a class="btn hvr-hover" href="#">Read More</a>
                 </div>
+                
             </div>
             <div class="row my-5">
                 <div class="col-sm-6 col-lg-4">
                     <div class="service-block-inner">
                         <h3>We are Trusted</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                        <p>PotatoFarmPro is committed to providing reliable and accurate disease detection, empowering farmers to make confident decisions. Our platform is built with transparency and precision to ensure farmers receive dependable insights into crop health.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="service-block-inner">
                         <h3>We are Professional</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                        <p>With a foundation in advanced machine learning and a user-friendly design, PotatoFarmPro is crafted to support professional farming practices. Our AI-driven tools are developed to meet the high standards expected in the agricultural industry.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="service-block-inner">
-                        <h3>We are Expert</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                        <h3>We are Experts</h3>
+                        <p>Our team combines expertise in agriculture and technology to deliver a platform specifically tailored for potato and tomato disease detection. Backed by extensive research and data, we provide solutions that farmers can trust.</p>
                     </div>
                 </div>
             </div>
-            <div class="row my-4">
-                <div class="col-12">
+            
+            <div class="row my-4 d-flex justify-content-center">
+                <div class="col-12 text-center">
                     <h2 class="noo-sh-title">Meet Our Team</h2>
                 </div>
-                <div class="col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-3 mx-auto text-center">
                     <div class="hover-team">
                         <div class="our-team"> 
-                            <img src="{% static 'images/img-1.jpg' %}" alt="Our Team Member" />
+                            <img src="https://sandeepkumar3869.github.io/PORTFOLIO/images/ID%20card.jpg"  alt="Team Member" />
                         </div>
-                        
-                            <div class="team-content">
-                                <h3 class="title">Williamson</h3> <span class="post">Web Developer</span> </div>
-                            <ul class="social">
-                                <li>
-                                    <a href="#" class="fab fa-facebook"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-google-plus"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-youtube"></a>
-                                </li>
-                            </ul>
-                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                        <div class="team-content">
+                            <h3 class="title">Sandeep</h3> 
+                            <span class="post">Machine Learning Engineer</span>
                         </div>
-                        <div class="team-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent urna diam, maximus ut ullamcorper quis, placerat id eros. Duis semper justo sed condimentum rutrum. Nunc tristique purus turpis. Maecenas vulputate. </p>
-                        </div>
-                        <hr class="my-0"> </div>
+                        <ul class="social d-flex justify-content-center">
+                            <li>
+                                <a href="https://facebook.com" class="fab fa-facebook"></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com" class="fab fa-twitter"></a>
+                            </li>
+                            <li>
+                                <a href="https://plus.google.com" class="fab fa-google-plus"></a>
+                            </li>
+                            <li>
+                                <a href="https://youtube.com" class="fab fa-youtube"></a>
+                            </li>
+                        </ul>
+                        <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="team-description">
+                        <p>Sandeep is a skilled Machine Learning Engineer with a focus on developing innovative solutions for the agricultural sector. Specializing in AI for disease detection, he combines technical expertise with a passion for supporting farmers in managing crop health efficiently.</p>
+                    </div>
+                    <hr class="my-0"> 
                 </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="hover-team">
-                        <div class="our-team"> 
-                            <img src="{% static 'images/img-2.jpg' %}" alt="Our Team Member" />
-                        </div>
-                        
-                            <div class="team-content">
-                                <h3 class="title">Kristiana</h3> <span class="post">Web Developer</span> </div>
-                            <ul class="social">
-                                <li>
-                                    <a href="#" class="fab fa-facebook"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-google-plus"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-youtube"></a>
-                                </li>
-                            </ul>
-                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
-                        </div>
-                        <div class="team-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent urna diam, maximus ut ullamcorper quis, placerat id eros. Duis semper justo sed condimentum rutrum. Nunc tristique purus turpis. Maecenas vulputate. </p>
-                        </div>
-                        <hr class="my-0"> </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="hover-team">
-                        <div class="our-team"> 
-                            <img src="{% static 'images/img-3.jpg' %}" alt="Our Team" />
-                        </div>
-                        
-                            <div class="team-content">
-                                <h3 class="title">Steve Thomas</h3> <span class="post">Web Developer</span> </div>
-                            <ul class="social">
-                                <li>
-                                    <a href="#" class="fab fa-facebook"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-google-plus"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-youtube"></a>
-                                </li>
-                            </ul>
-                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
-                        </div>
-                        <div class="team-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent urna diam, maximus ut ullamcorper quis, placerat id eros. Duis semper justo sed condimentum rutrum. Nunc tristique purus turpis. Maecenas vulputate. </p>
-                        </div>
-                        <hr class="my-0"> </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="hover-team">
-                        <div class="our-team"> 
-                            <img src="{% static 'images/img-1.jpg' %}" alt="" />
-                        </div>
-                            <div class="team-content">
-                                <h3 class="title">Williamson</h3> <span class="post">Web Developer</span> </div>
-                            <ul class="social">
-                                <li>
-                                    <a href="#" class="fab fa-facebook"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-google-plus"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-youtube"></a>
-                                </li>
-                            </ul>
-                            <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
-                        </div>
-                        <div class="team-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent urna diam, maximus ut ullamcorper quis, placerat id eros. Duis semper justo sed condimentum rutrum. Nunc tristique purus turpis. Maecenas vulputate. </p>
-                        </div>
-                        <hr class="my-0"> </div>
-                </div>
+            </div>
+            
+            
+               
+                
+                
             </div>
         </div>
     </div>
@@ -548,7 +488,7 @@
                                     <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:sksandy3869@gmail.com">sksandy3869@gmail.com</a></p>
                                 </li>
                             </ul>
                         </div>
